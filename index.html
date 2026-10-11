@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#ede7de" name="theme-color"/>
+<meta content="Биология и котики — видеоуроки, материалы, скрипты и практика по нервной системе, анализаторам и эндокринной системе." name="description"/>
+<title>Биология и котики | БиК</title>
+<style>
+    :root{
+      --bg:#ece6dd;
+      --surface:#f7f4ee;
+      --white:#ffffff;
+      --ink:#413d70;
+      --ink-soft:#726d94;
+      --accent:#f79a1b;
+      --accent-2:#ffb347;
+      --line:#ddd2c5;
+      --chip:#f5efe7;
+      --green:#b7d67a;
+      --shadow:0 16px 40px rgba(65,61,112,.08);
+      --radius-xl:36px;
+      --radius-lg:28px;
+      --radius-md:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.5;
+    }
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    button{font:inherit;cursor:pointer}
+    .container{width:min(1240px,calc(100% - 48px));margin:0 auto}
+
+    .topbar{
+      position:sticky;top:0;z-index:40;
+      background:rgba(251,249,246,.92);
+      border-bottom:1px solid rgba(65,61,112,.06);
+      backdrop-filter:blur(10px);
+    }
+    .nav{
+      min-height:124px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      min-width:0;
+    }
+    .logo-mark{width:104px;height:78px;flex-shrink:0}
+    .logo-text{
+      font-weight:900;
+      font-size:34px;
+      line-height:.95;
+      letter-spacing:-1.5px;
+      color:var(--ink);
+    }
+    .navlinks{display:flex;align-items:center;gap:52px;flex-wrap:wrap;justify-content:flex-end}
+    .navlinks a{
+      font-size:28px;
+      font-weight:800;
+      color:var(--ink);
+      transition:.2s ease;
+    }
+    .navlinks a:hover{color:var(--accent)}
+    .subscribe{
+      background:var(--accent);
+      color:#fff;
+      border:none;
+      border-radius:20px;
+      padding:18px 30px;
+      font-size:26px;
+      font-weight:900;
+      box-shadow:var(--shadow);
+      white-space:nowrap;
+    }
+    .subscribe:hover{transform:translateY(-2px)}
+
+    .hero-wrap{background:var(--bg)}
+    .hero{
+      display:grid;
+      grid-template-columns:1.45fr .75fr;
+      gap:36px;
+      align-items:center;
+      padding:78px 0 42px;
+      min-height:560px;
+    }
+    .topic-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--ink);
+      color:#fff;
+      padding:14px 28px;
+      border-radius:28px;
+      font-size:26px;
+      font-weight:850;
+      margin-bottom:24px;
+    }
+    h1{
+      margin:0;
+      font-size:clamp(48px,6.2vw,104px);
+      line-height:.98;
+      letter-spacing:-3px;
+      font-weight:950;
+      color:var(--ink);
+      max-width:920px;
+    }
+    h1 .accent{color:var(--accent)}
+    .hero p{
+      margin:28px 0 32px;
+      font-size:clamp(24px,2.05vw,36px);
+      line-height:1.4;
+      color:var(--ink-soft);
+      max-width:980px;
+    }
+    .steps{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+    }
+    .step{
+      background:var(--chip);
+      border:2px solid #ddcfbd;
+      border-radius:999px;
+      padding:18px 28px;
+      font-size:26px;
+      font-weight:850;
+      color:var(--ink);
+      box-shadow:0 4px 0 rgba(65,61,112,.04);
+    }
+    .step b{color:var(--accent);margin-right:8px}
+
+    .mascot-wrap{display:flex;justify-content:center;align-items:center}
+    .mascot-circle{
+      width:min(100%,360px);
+      aspect-ratio:1/1;
+      background:radial-gradient(circle at 35% 35%, #ffb31c 0 38%, #f79a1b 39% 100%);
+      border-radius:50%;
+      position:relative;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mascot-circle svg{position:absolute;inset:0;width:100%;height:100%}
+
+    .section{padding:42px 0 0}
+    .section-card{
+      background:var(--surface);
+      border:1px solid rgba(65,61,112,.08);
+      border-radius:34px;
+      box-shadow:var(--shadow);
+      padding:34px;
+      margin-bottom:30px;
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:28px;
+      flex-wrap:wrap;
+    }
+    .section-kicker{
+      font-size:15px;
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      color:var(--accent);
+      font-weight:900;
+      margin-bottom:8px;
+    }
+    .section h2{
+      margin:0;
+      font-size:clamp(34px,4.2vw,58px);
+      letter-spacing:-1.7px;
+      line-height:1;
+    }
+    .section-desc{
+      max-width:520px;
+      font-size:18px;
+      color:var(--ink-soft);
+    }
+    .ghost-btn{
+      border:2px solid #e5d4c1;
+      background:#fffaf4;
+      color:var(--ink);
+      border-radius:999px;
+      padding:14px 22px;
+      font-size:16px;
+      font-weight:800;
+    }
+
+    .cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .lesson{
+      background:#fff;
+      border:1px solid #eadfce;
+      border-radius:24px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+    }
+    .lesson-thumb{
+      min-height:170px;
+      background:linear-gradient(135deg,#fff1cf,#ffd789);
+      position:relative;
+      padding:18px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      overflow:hidden;
+    }
+    .lesson:nth-child(2) .lesson-thumb{background:linear-gradient(135deg,#ece8ff,#d7d1ff)}
+    .lesson:nth-child(3) .lesson-thumb{background:linear-gradient(135deg,#ffe9ef,#ffd2df)}
+    .lesson:nth-child(4) .lesson-thumb{background:linear-gradient(135deg,#ecf8d6,#cfe9a1)}
+    .lesson-badge{
+      background:#fff;
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:13px;
+      font-weight:900;
+      color:var(--ink);
+      box-shadow:0 6px 20px rgba(65,61,112,.08);
+      position:relative;z-index:1;
+    }
+    .lesson-emoji{
+      font-size:70px;
+      align-self:flex-end;
+      margin-right:4px;
+      position:relative;z-index:1;
+      filter:drop-shadow(0 7px 10px rgba(0,0,0,.08));
+    }
+    .lesson-play{
+      position:absolute;
+      right:16px;
+      bottom:16px;
+      width:52px;height:52px;
+      border-radius:50%;
+      background:#fff;
+      display:grid;place-items:center;
+      color:var(--accent);
+      font-size:18px;
+      font-weight:900;
+      box-shadow:var(--shadow);
+    }
+    .lesson-body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+    .lesson-num{font-size:12px;letter-spacing:1.3px;text-transform:uppercase;color:var(--accent);font-weight:900}
+    .lesson h3{margin:0;font-size:24px;line-height:1.15;letter-spacing:-.8px}
+    .lesson p{margin:0;color:var(--ink-soft);font-size:15px;min-height:68px}
+    .video-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:4px}
+    .action-link,.action-button{
+      border:none;
+      display:inline-flex;align-items:center;justify-content:center;
+      border-radius:999px;padding:12px 16px;
+      font-size:14px;font-weight:850;
+      min-height:44px;
+    }
+    .action-button{background:var(--ink);color:#fff}
+    .action-link{background:#fff2dd;color:var(--accent)}
+
+    .topics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:18px}
+    .topic-card{
+      background:#fff;
+      border:1px solid #eadfce;
+      border-radius:24px;
+      padding:22px;
+      min-height:100%;
+    }
+    .topic-icon{font-size:42px;margin-bottom:12px}
+    .topic-card h3{margin:0 0 8px;font-size:24px;letter-spacing:-.7px}
+    .topic-card p{margin:0;color:var(--ink-soft);font-size:15px}
+
+    .files-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .file-card{
+      background:#fff;
+      border:1px solid #eadfce;
+      border-radius:24px;
+      padding:22px;
+      display:flex;align-items:flex-start;gap:16px;
+      min-height:132px;
+      transition:.2s ease;
+    }
+    .file-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+    .file-icon{
+      width:60px;height:60px;border-radius:18px;
+      background:#fff2dd;
+      display:grid;place-items:center;
+      font-size:28px;flex-shrink:0;
+    }
+    .file-card:nth-child(2n) .file-icon{background:#efeaff}
+    .file-card:nth-child(3n) .file-icon{background:#eaf6d7}
+    .file-card h4{margin:0 0 6px;font-size:20px;line-height:1.2}
+    .file-card p{margin:0 0 14px;color:var(--ink-soft);font-size:14px}
+    .file-links{display:flex;gap:10px;flex-wrap:wrap}
+
+    .practice-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .practice-card{
+      background:#fff;
+      border:1px solid #eadfce;
+      border-radius:28px;
+      padding:28px;
+      display:flex;flex-direction:column;
+      min-height:290px;
+    }
+    .practice-card:nth-child(1){background:linear-gradient(180deg,#fffaf1 0,#ffffff 100%)}
+    .practice-card:nth-child(2){background:linear-gradient(180deg,#f8f5ff 0,#ffffff 100%)}
+    .practice-label{font-size:13px;letter-spacing:1.3px;text-transform:uppercase;color:var(--accent);font-weight:900}
+    .practice-card h3{margin:12px 0;font-size:36px;line-height:1.05;letter-spacing:-1.1px}
+    .practice-card p{margin:0 0 22px;font-size:16px;color:var(--ink-soft);max-width:430px}
+    .practice-card .action-button{align-self:flex-start;margin-top:auto}
+
+    
+    .modal{
+      position:fixed;inset:0;z-index:80;
+      background:rgba(44,40,80,.55);
+      display:none;align-items:center;justify-content:center;
+      padding:20px;
+    }
+    .modal.open{display:flex}
+    .dialog{
+      width:min(760px,100%);
+      max-height:min(88vh,900px);
+      overflow:auto;
+      background:var(--surface);
+      border-radius:30px;
+      padding:26px;
+      box-shadow:0 35px 100px rgba(0,0,0,.23);
+      border:1px solid rgba(65,61,112,.08);
+    }
+    .dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+    .dialog h2{margin:0;font-size:34px;line-height:1.05;letter-spacing:-1px}
+    .close-btn{
+      width:42px;height:42px;border-radius:50%;
+      border:none;background:#fff;color:var(--ink);
+      font-size:24px;font-weight:800;flex-shrink:0;
+    }
+    .modal-desc{font-size:16px;color:var(--ink-soft);margin:10px 0 0}
+    .video-player{
+      margin:22px 0 16px;
+      border-radius:22px;
+      overflow:hidden;
+      background:#000;
+      aspect-ratio:16/9;
+    }
+    .video-player iframe{width:100%;height:100%;border:0}
+    .progress{height:10px;border-radius:999px;background:#e8dfd4;overflow:hidden;margin:22px 0}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#ffbe59);width:0;transition:.25s}
+    .count{font-size:14px;color:var(--ink-soft);font-weight:800}
+    .question{margin:18px 0;font-size:24px;font-weight:900;line-height:1.3}
+    .choices{display:grid;gap:10px}
+    .choice{
+      width:100%;text-align:left;
+      border:1px solid #e0d2c1;
+      background:#fff;
+      color:var(--ink);
+      border-radius:18px;
+      padding:16px 18px;
+      font-size:16px;
+      font-weight:700;
+    }
+    .choice:hover:not(:disabled){border-color:var(--accent)}
+    .choice:disabled{cursor:default}
+    .choice.correct{background:#edf8db;border-color:#b8d67a}
+    .choice.wrong{background:#ffe8e8;border-color:#e7a5a5}
+    .feedback{margin-top:16px;padding:16px 18px;border-radius:18px;background:#fff;border:1px solid #eadfce;color:var(--ink)}
+    .actionrow{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:18px;flex-wrap:wrap}
+    .task{padding:20px;background:#fff;border:1px solid #eadfce;border-radius:24px;margin-top:18px}
+    .task strong{display:block;font-size:18px;line-height:1.35;margin-bottom:12px}
+    .task textarea{
+      width:100%;min-height:110px;resize:vertical;
+      font:inherit;color:var(--ink);
+      border:1px solid #e0d2c1;background:#fffaf6;
+      border-radius:16px;padding:14px;
+      outline-color:var(--accent);
+    }
+    .solution{display:none;margin-top:12px;padding:14px;border-radius:16px;background:#f7f2ff;border:1px solid #e2d8ff;font-size:15px}
+    .solution.show{display:block}
+
+    @media (max-width: 1180px){
+      .nav{min-height:100px}
+      .logo-mark{width:88px;height:66px}
+      .logo-text{font-size:28px}
+      .navlinks{gap:28px}
+      .navlinks a{font-size:22px}
+      .subscribe{font-size:21px;padding:15px 24px}
+      .hero{grid-template-columns:1fr;min-height:auto;padding-top:52px}
+      .mascot-wrap{justify-content:flex-start}
+      .mascot-circle{width:290px}
+      .cards-4{grid-template-columns:repeat(2,1fr)}
+      .topics{grid-template-columns:1fr}
+    }
+    @media (max-width: 820px){
+      .container{width:min(100% - 28px,1240px)}
+      .nav{align-items:flex-start;flex-direction:column;padding:18px 0 20px;gap:16px}
+      .navlinks{width:100%;gap:14px 22px}
+      .navlinks a{font-size:19px}
+      .subscribe{font-size:18px;padding:13px 18px}
+      .logo-text{font-size:24px}
+      .logo-mark{width:78px;height:58px}
+      .topic-pill{font-size:18px;padding:11px 18px}
+      .hero p{font-size:19px;margin:18px 0 24px}
+      .steps{gap:12px}
+      .step{font-size:18px;padding:12px 18px}
+      .cards-4,.files-grid,.practice-grid{grid-template-columns:1fr}
+      .section-card{padding:22px}
+      .dialog{padding:20px}
+      .practice-card h3{font-size:30px}
+      .section h2{font-size:34px}
+    }
+  
+    /* Фирменная зелёная гамма БиК */
+    :root{
+      --bg:#f5f8e9;--surface:#fffef7;--white:#fff;
+      --ink:#253b2b;--ink-soft:#65766b;
+      --accent:#4d8d30;--accent-2:#a8cf61;
+      --line:#d7e4c5;--chip:#fffef7;
+      --green:#b7d67a;
+      --shadow:0 16px 40px rgba(49,92,32,.1);
+    }
+    .topbar{background:rgba(255,255,250,.96);border-bottom-color:#d9e6cd}
+    .logo-official{display:block;height:auto;object-fit:contain;object-position:center}
+
+    .brand-lockup{display:flex;align-items:center;gap:12px;flex-wrap:nowrap}
+    .logo-official.combined-logo{width:min(100%,390px);max-width:clamp(220px,34vw,390px);filter:drop-shadow(0 8px 16px rgba(63,106,44,.10));flex:0 0 auto}
+    .brand-lockup-text{display:none}
+    .subscribe{background:#4d8d30;color:#fff}
+    .navlinks a:hover{color:#4d8d30}
+    .hero-wrap{background:#f5f8e9}
+    .topic-pill{background:#3c702c}
+    .step{background:#fff;border-color:#dae6c7}
+    .step b{color:#4d8d30}
+    .mascot-photo{width:min(100%,380px);aspect-ratio:1/1;background:#ffffff;border-radius:32px;overflow:hidden;box-shadow:0 20px 50px rgba(74,125,41,.19);border:8px solid #fff;position:relative;transform:none}
+    .mascot-photo img{width:100%;height:100%;display:block;object-fit:contain;object-position:center;padding:18px;background:#f5f8e9}
+    .mascot-caption{position:absolute;left:15px;bottom:15px;right:15px;background:rgba(255,255,255,.94);color:#376d2c;border-radius:17px;padding:10px 14px;font-weight:900;font-size:16px;text-align:center;box-shadow:0 6px 18px #264b1e25}
+    .mascot-note{font-size:14px;color:#4f7740;margin-top:18px;text-align:center;font-weight:700}
+    .topic-card{position:relative;overflow:hidden}
+    .topic-card::after{content:"";position:absolute;width:96px;height:85px;right:-7px;bottom:-13px;background:url("images/cat-bik.png") center/contain no-repeat;opacity:.18}
+    .section-card{border-color:#d8e8c7}
+    .lesson,.file-card,.topic-card,.practice-card{border-color:#d6e6c3}
+    .lesson-thumb{background:linear-gradient(135deg,#e8f7ce,#b7d984)}
+    .lesson:nth-child(2) .lesson-thumb{background:linear-gradient(135deg,#e6f1d4,#c9e7a5)}
+    .lesson:nth-child(3) .lesson-thumb{background:linear-gradient(135deg,#f7f4de,#e6eb9d)}
+    .lesson:nth-child(4) .lesson-thumb{background:linear-gradient(135deg,#dff2d4,#a9d8ad)}
+    .lesson-play{color:#4d8d30}
+    .file-icon,.file-card:nth-child(2n) .file-icon,.file-card:nth-child(3n) .file-icon{background:#e8f4d6}
+    .action-link{background:#e8f4d6;color:#386f28}
+    .practice-card:nth-child(1){background:linear-gradient(180deg,#f5fbe7 0,#ffffff 100%)}
+    .practice-card:nth-child(2){background:linear-gradient(180deg,#edf6e8 0,#ffffff 100%)}
+    .progress-fill{background:linear-gradient(90deg,#4d8d30,#a7ce65)}
+    @media(max-width:820px){.brand-lockup{gap:12px}.brand-lockup-text{font-size:34px}.logo-official.cat-only{width:86px}.mascot-photo{width:280px}}
+
+    /* Ровные пиктограммы на карточках видеолекций */
+    .lesson-thumb{height:190px;min-height:190px;position:relative;overflow:hidden}
+    .lesson-emoji{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);margin:0;width:104px;height:104px;display:flex;align-items:center;justify-content:center;font-size:78px;line-height:1;z-index:1;filter:drop-shadow(0 7px 8px rgba(30,65,28,.13));font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+    .lesson-badge{position:relative;z-index:3}
+    .lesson-play{z-index:3;right:16px;bottom:16px}
+    @media(max-width:550px){.lesson-thumb{height:175px;min-height:175px}.lesson-emoji{font-size:70px;width:90px;height:90px}}
+
+/* Связанные лекции и учебные материалы */
+.lesson-resources{display:flex;flex-wrap:wrap;align-content:flex-start;gap:7px;margin-top:4px;margin-bottom:4px}
+.lesson-resources-title{flex-basis:100%;font-weight:850;font-size:13px;color:#3c702c;margin-bottom:2px}
+.resource-link,.watch-lecture{display:inline-flex;align-items:center;text-decoration:none;background:#edf5df;border:1px solid #cfe3b5;color:#326523;border-radius:999px;padding:7px 10px;font-weight:750;font-size:12px;line-height:1.3;transition:background .2s}
+.resource-link:hover,.watch-lecture:hover{background:#dceec6}
+.video-related{background:#f4f9eb;border:1px solid #d5e7c4;border-radius:17px;padding:16px;margin-bottom:18px}
+.video-related-title{font-weight:900;font-size:16px;margin-bottom:10px;color:#244929}
+.video-related-list{display:flex;gap:9px;flex-wrap:wrap}
+.video-related a{background:#fff;border:1px solid #d5e7c4;border-radius:999px;padding:10px 13px;font-size:13px;font-weight:800;color:#326523}
+.video-related a:hover{background:#e8f5d8}
+.video-actions{margin-top:auto}
+@media(max-width:820px){.resource-link{font-size:12px}.lesson-resources{margin-top:10px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="logo" href="#top" aria-label="Биология и котики — на главную">
+      <div class="brand-lockup">
+        <img alt="Биология и котики" class="logo-official combined-logo" src="images/logo-biology-and-cats.png"/>
+      </div>
+    </a>
+    <nav class="navlinks">
+      <a href="#video">Видео</a>
+      <a href="#materials">Материалы</a>
+      <a href="#test">Тест</a>
+      <a href="#part2">Вторая часть</a>
+      <a class="subscribe" href="https://biologyandcats.ru/" rel="noopener noreferrer" target="_blank">Подписаться</a>
+    </nav>
+  </div>
+</header>
+<main id="top">
+<section class="hero-wrap">
+<div class="container hero">
+<div>
+<div class="topic-pill">Три темы БиК</div>
+<h1><span>Нервная система,</span> <span class="accent">анализаторы</span><br/><span>и эндокринная система</span></h1>
+<p>Смотрим лекции, работаем со скриптами и материалами, а потом проверяем себя тестом и заданиями второй части.</p>
+<div class="steps">
+<a class="step" href="#video"><b>1</b> Видеоуроки</a>
+<a class="step" href="#materials"><b>2</b> Скрипты</a>
+<a class="step" href="#materials"><b>3</b> Материалы</a>
+<a class="step" href="#test"><b>4</b> Практика</a>
+</div>
+</div>
+<div aria-hidden="true" class="mascot-wrap">
+<div><div class="mascot-photo"><img alt="Котик Биология и котики" src="images/cat-bik.png"/><div class="mascot-caption">Биология и котики</div></div><div class="mascot-note">Твой помощник в подготовке к ЕГЭ</div></div>
+</div>
+</div>
+</section>
+<section class="section" id="video">
+<div class="container section-card">
+<div class="section-head">
+<div>
+<div class="section-kicker">Раздел 1</div>
+<h2>Видеоуроки</h2>
+</div>
+<div class="section-desc">Четыре лекции по темам из твоих материалов. Каждое видео открывается прямо на странице через Kinescope.</div>
+</div>
+<div class="cards-4">
+<article class="lesson" id="lecture-1">
+<div class="lesson-thumb"><div class="lesson-badge">Лекция 1</div><div class="lesson-emoji">🧠</div><div class="lesson-play">▶</div></div>
+<div class="lesson-body">
+<div class="lesson-num">Нервная система</div>
+<h3>Нервная система</h3>
+<p>Функции нервной системы, нейрон, синапс, рефлексы и вегетативная регуляция.</p>
+<div class="lesson-resources"><div class="lesson-resources-title">Материалы к лекции</div><a class="resource-link" href="materials/material-02.pdf" rel="noopener" target="_blank">↗ Пустой скрипт</a><a class="resource-link" href="materials/material-01.pdf" rel="noopener" target="_blank">↗ Заполненный скрипт</a><a class="resource-link" href="materials/material-08.pdf" rel="noopener" target="_blank">↗ Таблица ВНС</a></div><div class="video-actions"><button class="action-button" data-video="1">Смотреть</button><a class="action-link" href="https://kinescope.io/dXbShxX3JBKd8G7jcH7NJk" rel="noopener noreferrer" target="_blank">Открыть ↗</a></div>
+</div>
+</article>
+<article class="lesson" id="lecture-2">
+<div class="lesson-thumb"><div class="lesson-badge">Лекция 2</div><div class="lesson-emoji">👁️</div><div class="lesson-play">▶</div></div>
+<div class="lesson-body">
+<div class="lesson-num">Анализаторы</div>
+<h3>Анализаторы</h3>
+<p>Рецепторы, отделы анализатора, слуховой анализатор и строение отделов уха.</p>
+<div class="lesson-resources"><div class="lesson-resources-title">Материалы к лекции</div><a class="resource-link" href="materials/material-04.pdf" rel="noopener" target="_blank">↗ Пустой скрипт</a><a class="resource-link" href="materials/material-03.pdf" rel="noopener" target="_blank">↗ Заполненный скрипт</a></div><div class="video-actions"><button class="action-button" data-video="2">Смотреть</button><a class="action-link" href="https://kinescope.io/4QxAVGpJZk4qKVcJh3MAJD" rel="noopener noreferrer" target="_blank">Открыть ↗</a></div>
+</div>
+</article>
+<article class="lesson" id="lecture-3">
+<div class="lesson-thumb"><div class="lesson-badge">Лекция 3</div><div class="lesson-emoji">📚</div><div class="lesson-play">▶</div></div>
+<div class="lesson-body">
+<div class="lesson-num">Обобщение</div>
+<h3>Обобщение</h3>
+<p>Повторение и систематизация основных идей перед практикой и проверкой знаний.</p>
+<div class="lesson-resources"><div class="lesson-resources-title">Материалы к лекции</div><a class="resource-link" href="materials/material-01.pdf" rel="noopener" target="_blank">↗ Нервная система</a><a class="resource-link" href="materials/material-03.pdf" rel="noopener" target="_blank">↗ Анализаторы</a><a class="resource-link" href="materials/material-05.pdf" rel="noopener" target="_blank">↗ Эндокринная система</a></div><div class="video-actions"><button class="action-button" data-video="3">Смотреть</button><a class="action-link" href="https://kinescope.io/bfezw8EJt2sJU8pdM27YM3" rel="noopener noreferrer" target="_blank">Открыть ↗</a></div>
+</div>
+</article>
+<article class="lesson" id="lecture-4">
+<div class="lesson-thumb"><div class="lesson-badge">Лекция 4</div><div class="lesson-emoji">🧬</div><div class="lesson-play">▶</div></div>
+<div class="lesson-body">
+<div class="lesson-num">Эндокринная система</div>
+<h3>Эндокринная система</h3>
+<p>Железы внутренней секреции, свойства гормонов и механизмы обратной связи.</p>
+<div class="lesson-resources"><div class="lesson-resources-title">Материалы к лекции</div><a class="resource-link" href="materials/material-06.pdf" rel="noopener" target="_blank">↗ Пустой скрипт</a><a class="resource-link" href="materials/material-05.pdf" rel="noopener" target="_blank">↗ Заполненный скрипт</a><a class="resource-link" href="materials/material-07.pdf" rel="noopener" target="_blank">↗ Обратная связь</a></div><div class="video-actions"><button class="action-button" data-video="4">Смотреть</button><a class="action-link" href="https://kinescope.io/euJecxC6FQzZxqQpUPGiCZ" rel="noopener noreferrer" target="_blank">Открыть ↗</a></div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<section class="section" id="materials">
+<div class="container section-card">
+<div class="section-head">
+<div>
+<div class="section-kicker">Раздел 2</div>
+<h2>Материалы и скрипты</h2>
+</div>
+<div class="section-desc">Здесь собраны все твои PDF-файлы: заполненные и пустые скрипты, а также дополнительные таблицы и материалы.</div>
+</div>
+<div class="topics">
+<div class="topic-card"><div class="topic-icon">🧠</div><h3>Нервная система</h3><p>Скрипты по строению и функциям нервной системы, а также таблица по симпатической и парасимпатической системам.</p></div>
+<div class="topic-card"><div class="topic-icon">👁️</div><h3>Анализаторы</h3><p>Материалы по рецепторам, отделам анализатора и слуховому анализатору с пустой и заполненной версией.</p></div>
+<div class="topic-card"><div class="topic-icon">🧬</div><h3>Эндокринная система</h3><p>Гормоны, железы, обратная связь и скрипты по эндокринной регуляции в удобном формате PDF.</p></div>
+</div>
+<div class="files-grid">
+<article class="file-card"><div class="file-icon">📄</div><div><h4>Нервная система — заполненный скрипт</h4><p>Готовый конспект по нервной системе.</p><div class="file-links"><a class="action-button" href="materials/material-01.pdf" target="_blank">Открыть</a><a class="action-link" download="" href="materials/material-01.pdf">Скачать</a><a class="watch-lecture" href="#lecture-1">▶ К лекции 1</a></div></div></article>
+<article class="file-card"><div class="file-icon">📝</div><div><h4>Нервная система — пустой скрипт</h4><p>Версия для самостоятельного заполнения.</p><div class="file-links"><a class="action-button" href="materials/material-02.pdf" target="_blank">Открыть</a><a class="action-link" download="" href="materials/material-02.pdf">Скачать</a><a class="watch-lecture" href="#lecture-1">▶ К лекции 1</a></div></div></article>
+<article class="file-card"><div class="file-icon">📄</div><div><h4>Анализаторы — заполненный скрипт</h4><p>Основные понятия, рецепторы и слуховой анализатор.</p><div class="file-links"><a class="action-button" href="materials/material-03.pdf" target="_blank">Открыть</a><a class="action-link" download="" href="materials/material-03.pdf">Скачать</a><a class="watch-lecture" href="#lecture-2">▶ К лекции 2</a></div></div></article>
+<article class="file-card"><div class="file-icon">📝</div><div><h4>Анализаторы — пустой скрипт</h4><p>Подходит для работы на лекции и повторения.</p><div class="file-links"><a class="action-button" href="materials/material-04.pdf" target="_blank">Открыть</a><a class="action-link" download="" href="materials/material-04.pdf">Скачать</a><a class="watch-lecture" href="#lecture-2">▶ К лекции 2</a></div></div></article>
+<article class="file-card"><div class="file-icon">📄</div><div><h4>Эндокринная система — заполненный скрипт</h4><p>Железы, гормоны и их свойства.</p><div class="file-links"><a class="action-button" href="materials/material-05.pdf" target="_blank">Открыть</a><a class="action-link" download="" href="materials/material-05.pdf">Скачать</a><a class="watch-lecture" href="#lecture-4">▶ К лекции 4</a></div></div></article>
+<article class="file-card"><div class="file-icon">📝</div><div><h4>Эндокринная система — пустой скрипт</h4><p>Версия для заполнения по ходу лекции.</p><div class="file-links"><a class="action-button" href="materials/material-06.pdf" target="_blank">Открыть</a><a class="action-link" download="" href="materials/material-06.pdf">Скачать</a><a class="watch-lecture" href="#lecture-4">▶ К лекции 4</a></div></div></article>
+<article class="file-card"><div class="file-icon">🔁</div><div><h4>Механизм обратной связи</h4><p>Дополнительный материал по отрицательной обратной связи.</p><div class="file-links"><a class="action-button" href="materials/material-07.pdf" target="_blank">Открыть</a><a class="action-link" download="" href="materials/material-07.pdf">Скачать</a><a class="watch-lecture" href="#lecture-4">▶ К лекции 4</a></div></div></article>
+<article class="file-card"><div class="file-icon">📊</div><div><h4>Таблица по симпатической и парасимпатической системе</h4><p>Сравнение эффектов вегетативных отделов нервной системы.</p><div class="file-links"><a class="action-button" href="materials/material-08.pdf" target="_blank">Открыть</a><a class="action-link" download="" href="materials/material-08.pdf">Скачать</a><a class="watch-lecture" href="#lecture-1">▶ К лекции 1</a></div></div></article>
+</div>
+</div>
+</section>
+<section class="section" id="test">
+<div class="container section-card">
+<div class="section-head">
+<div>
+<div class="section-kicker">Раздел 3</div>
+<h2>Практика</h2>
+</div>
+<div class="section-desc">Проверь себя с помощью теста и заданий второй части. Всё подобрано под темы нервной системы, анализаторов и эндокринной регуляции.</div>
+</div>
+<div class="practice-grid">
+<article class="practice-card">
+<div class="practice-label">Тест</div>
+<h3>Проверить себя по теме</h3>
+<p>12 вопросов с мгновенной проверкой и короткими пояснениями по каждому ответу.</p>
+<button class="action-button" id="start-quiz">Пройти тест</button>
+</article>
+<article class="practice-card" id="part2">
+<div class="practice-label">Вторая часть</div>
+<h3>Развёрнутые ответы</h3>
+<p>6 заданий на объяснение биологических процессов. Можно написать ответ и открыть эталон для самопроверки.</p>
+<button class="action-button" id="start-open">Открыть задания</button>
+</article>
+</div>
+</div>
+</section>
+</main>
+
+<div aria-label="Просмотр видеолекции" aria-modal="true" class="modal" id="video-modal" role="dialog">
+<div class="dialog">
+<div class="dialog-head">
+<div>
+<h2 id="video-modal-title">Видеолекция</h2>
+<p class="modal-desc">Плеер Kinescope встроен прямо на сайт. Если он не воспроизводится, можно открыть видео в отдельной вкладке.</p>
+</div>
+<button aria-label="Закрыть" class="close-btn" data-close="">×</button>
+</div>
+<div class="video-player"><iframe allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen="" id="video-frame" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="about:blank"></iframe></div><div class="video-related" id="video-related"></div>
+<a class="subscribe" href="https://kinescope.io/" id="video-external" rel="noopener noreferrer" style="display:inline-flex;font-size:18px;padding:14px 22px" target="_blank">Открыть видео в Kinescope ↗</a>
+</div>
+</div>
+<div aria-label="Тест по биологии" aria-modal="true" class="modal" id="quiz-modal" role="dialog">
+<div class="dialog">
+<div class="dialog-head">
+<div>
+<h2 id="quiz-title">Тест по биологии</h2>
+<p class="modal-desc">Один правильный ответ на каждый вопрос.</p>
+</div>
+<button aria-label="Закрыть" class="close-btn" data-close="">×</button>
+</div>
+<div id="quiz-content"></div>
+</div>
+</div>
+<div aria-label="Задания второй части" aria-modal="true" class="modal" id="open-modal" role="dialog">
+<div class="dialog">
+<div class="dialog-head">
+<div>
+<h2>Задания второй части</h2>
+<p class="modal-desc">Напиши ответ своими словами, затем сравни его с эталоном.</p>
+</div>
+<button aria-label="Закрыть" class="close-btn" data-close="">×</button>
+</div>
+<div id="open-content"></div>
+</div>
+</div>
+<script>
+    'use strict';
+    const VIDEO_URLS = [
+      'https://kinescope.io/dXbShxX3JBKd8G7jcH7NJk',
+      'https://kinescope.io/4QxAVGpJZk4qKVcJh3MAJD',
+      'https://kinescope.io/bfezw8EJt2sJU8pdM27YM3',
+      'https://kinescope.io/euJecxC6FQzZxqQpUPGiCZ'
+    ];
+
+    const questions = [
+      {q:'Какой отросток нейрона обычно проводит импульс от тела клетки?',a:['Дендрит','Аксон','Ядро','Рецептор'],c:1,e:'Аксон проводит нервный импульс от тела нейрона к другим клеткам.'},
+      {q:'Что такое рефлекс?',a:['Реакция на раздражитель, осуществляемая нервной системой','Выделение гормона железой','Рост клетки','Только произвольное движение'],c:0,e:'Рефлекс — ответная реакция организма на раздражение, реализуемая при участии нервной системы.'},
+      {q:'Какие отделы образуют центральную нервную систему?',a:['Нервы и нервные узлы','Головной и спинной мозг','Рецепторы и мышцы','Гипофиз и надпочечники'],c:1,e:'ЦНС состоит из головного и спинного мозга.'},
+      {q:'Как симпатическая нервная система обычно влияет на сердцебиение?',a:['Замедляет','Останавливает','Учащает','Не влияет'],c:2,e:'При реакции «бей или беги» частота сердечных сокращений обычно увеличивается.'},
+      {q:'Какой отдел анализатора непосредственно воспринимает раздражитель?',a:['Корковый','Проводниковый','Рецепторный','Двигательный'],c:2,e:'Рецепторы воспринимают воздействие и преобразуют его в электрический сигнал.'},
+      {q:'Где располагаются палочки и колбочки?',a:['В сетчатке','В хрусталике','В радужке','В зрительном нерве'],c:0,e:'Палочки и колбочки — фоторецепторы сетчатки.'},
+      {q:'Где находятся рецепторные волосковые клетки слуха?',a:['В барабанной перепонке','В улитке внутреннего уха','В ушной раковине','В слуховой трубе'],c:1,e:'Волосковые клетки кортиева органа воспринимают колебания жидкости улитки.'},
+      {q:'Какой отдел коры в основном обрабатывает слуховые сигналы?',a:['Затылочный','Лобный','Височный','Теменной'],c:2,e:'Слуховые области коры расположены в височной доле.'},
+      {q:'Какой гормон снижает концентрацию глюкозы в крови?',a:['Глюкагон','Инсулин','Адреналин','Тироксин'],c:1,e:'Инсулин способствует усвоению и запасанию глюкозы.'},
+      {q:'Какая железа вырабатывает тироксин?',a:['Щитовидная','Поджелудочная','Надпочечник','Гипофиз'],c:0,e:'Тироксин (Т4) синтезируется в щитовидной железе.'},
+      {q:'Как выделяют гормоны железы внутренней секреции?',a:['Через выводные протоки','Непосредственно во внутреннюю среду','Только в кишечник','Через поверхность кожи'],c:1,e:'Эндокринные железы не имеют выводных протоков и выделяют гормоны во внутреннюю среду.'},
+      {q:'Что характеризует отрицательную обратную связь?',a:['Усиление исходного отклонения','Стабилизация параметра и уменьшение отклонения','Отключение нервной системы','Постоянный рост секреции'],c:1,e:'Отрицательная обратная связь уменьшает отклонения от нормы, поддерживая гомеостаз.'}
+    ];
+
+    const openTasks = [
+      {q:'Опишите путь нервного импульса по простой рефлекторной дуге.',a:'Рецептор воспринимает раздражитель; сигнал идёт по чувствительному нейрону в ЦНС, может передаваться через вставочный нейрон, затем по двигательному нейрону к рабочему органу, вызывая ответ.'},
+      {q:'Чем отличаются симпатическое и парасимпатическое влияния на сердце и пищеварение?',a:'Симпатическая система обычно учащает сердцебиение и тормозит моторику и секрецию ЖКТ. Парасимпатическая система замедляет сердцебиение и усиливает пищеварительную активность.'},
+      {q:'Назовите три отдела анализатора и объясните их функции.',a:'Рецепторный отдел воспринимает раздражитель и превращает его энергию в нервный сигнал. Проводниковый передаёт сигнал по нервным путям. Центральный анализирует поступившую информацию и участвует в формировании ощущения.'},
+      {q:'Опишите путь звуковой волны до возникновения нервного импульса.',a:'Звуковые волны вызывают колебания барабанной перепонки, которые через слуховые косточки передаются на овальное окно и жидкость улитки. Деформация волосковых клеток приводит к возникновению сигнала в слуховом нерве.'},
+      {q:'Почему повышение глюкозы крови стимулирует выделение инсулина?',a:'Повышение уровня глюкозы стимулирует β-клетки поджелудочной железы выделять инсулин. Усвоение и запасание глюкозы увеличивается, её содержание в крови снижается. Это пример отрицательной обратной связи.'},
+      {q:'Сравните нервную и гуморальную регуляцию по скорости, пути передачи и длительности действия.',a:'Нервная регуляция обычно быстрая и адресная: сигнал идёт по нервным волокнам, эффект часто кратковременный. Гуморальная передаётся веществами, в частности гормонами, с кровью; её действие обычно развивается медленнее и может сохраняться дольше.'}
+    ];
+
+    let index = 0;
+    let score = 0;
+    let selected = false;
+
+    const $ = (id) => document.getElementById(id);
+    const escapeHtml = (s) => String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+
+    function openModal(id){
+      $(id).classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+    function closeAll(){
+      document.querySelectorAll('.modal.open').forEach(m => m.classList.remove('open'));
+      $('video-frame').src = 'about:blank';
+      document.body.style.overflow='';
+    }
+    document.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', closeAll));
+    document.querySelectorAll('.modal').forEach(modal => modal.addEventListener('click', e => {
+      if(e.target === modal) closeAll();
+    }));
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape') closeAll();
+    });
+
+    document.querySelectorAll('[data-video]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = Number(btn.dataset.video) - 1;
+        const url = VIDEO_URLS[idx];
+        const videoId = url.split('/').pop();
+        const title = btn.closest('.lesson').querySelector('h3').textContent;
+        $('video-modal-title').textContent = title;
+        $('video-frame').src = 'https://kinescope.io/embed/' + encodeURIComponent(videoId);
+        $('video-external').href = url;
+        const resources = {
+          1: [['Пустой скрипт','material-02.pdf'],['Заполненный скрипт','material-01.pdf'],['Таблица ВНС','material-08.pdf']],
+          2: [['Пустой скрипт','material-04.pdf'],['Заполненный скрипт','material-03.pdf']],
+          3: [['Нервная система','material-01.pdf'],['Анализаторы','material-03.pdf'],['Эндокринная система','material-05.pdf']],
+          4: [['Пустой скрипт','material-06.pdf'],['Заполненный скрипт','material-05.pdf'],['Обратная связь','material-07.pdf']]
+        };
+        $('video-related').innerHTML = '<div class="video-related-title">📚 Материалы к лекции</div><div class="video-related-list">' + resources[idx + 1].map(([label,file]) => '<a href="pdf/' + file + '" target="_blank" rel="noopener noreferrer">' + label + ' ↗</a>').join('') + '</div>';
+        openModal('video-modal');
+      });
+    });
+
+    function renderQuestion(){
+      selected = false;
+      const q = questions[index];
+      $('quiz-title').textContent = 'Тест по нервной системе, анализаторам и гормонам';
+      $('quiz-content').innerHTML = `
+        <div class="progress"><div class="progress-fill" style="width:${(index / questions.length) * 100}%"></div></div>
+        <div class="count">ВОПРОС ${index + 1} ИЗ ${questions.length} · ВЕРНО ${score}</div>
+        <div class="question">${escapeHtml(q.q)}</div>
+        <div class="choices">
+          ${q.a.map((answer, i) => `<button class="choice" data-choice="${i}">${escapeHtml(answer)}</button>`).join('')}
+        </div>
+        <div id="result"></div>
+        <div class="actionrow">
+          <span class="count">Выбери один ответ</span>
+          <button id="next" class="action-button" disabled>${index === questions.length - 1 ? 'Результат →' : 'Следующий вопрос →'}</button>
+        </div>
+      `;
+      document.querySelectorAll('[data-choice]').forEach(btn => btn.addEventListener('click', () => choose(Number(btn.dataset.choice))));
+      $('next').addEventListener('click', () => {
+        index++;
+        if(index < questions.length) renderQuestion();
+        else renderFinal();
+      });
+    }
+
+    function choose(n){
+      if(selected) return;
+      selected = true;
+      const q = questions[index];
+      if(n === q.c) score++;
+      document.querySelectorAll('[data-choice]').forEach((btn, i) => {
+        btn.disabled = true;
+        if(i === q.c) btn.classList.add('correct');
+        else if(i === n) btn.classList.add('wrong');
+      });
+      $('result').innerHTML = `<div class="feedback"><strong>${n === q.c ? '✓ Верно!' : '✦ Почти! Правильный ответ: ' + escapeHtml(q.a[q.c])}</strong><div style="margin-top:6px">${escapeHtml(q.e)}</div></div>`;
+      $('next').disabled = false;
+    }
+
+    function renderFinal(){
+      $('quiz-title').textContent = 'Тест завершён!';
+      $('quiz-content').innerHTML = `
+        <div style="padding:34px 0;text-align:center">
+          <div style="font-size:64px">${score >= 10 ? '🏆' : score >= 7 ? '🌿' : '🐱'}</div>
+          <h2 style="font-size:60px;margin:10px 0 4px">${score} / ${questions.length}</h2>
+          <p class="modal-desc" style="max-width:480px;margin:0 auto 20px">${score >= 10 ? 'Супер! Ты отлично ориентируешься во всех трёх темах.' : score >= 7 ? 'Хороший результат! Повтори темы, где были ошибки, и попробуй ещё раз.' : 'Ничего страшного — повтори материалы и снова пройди тест.'}</p>
+          <button class="action-button" id="again">Пройти ещё раз ↗</button>
+        </div>
+      `;
+      $('again').onclick = beginQuiz;
+    }
+
+    function beginQuiz(){
+      index = 0;
+      score = 0;
+      renderQuestion();
+      openModal('quiz-modal');
+    }
+
+    $('start-quiz').addEventListener('click', beginQuiz);
+
+    $('start-open').addEventListener('click', () => {
+      $('open-content').innerHTML = openTasks.map((task, i) => `
+        <article class="task">
+          <strong>Задание ${i + 1}. ${escapeHtml(task.q)}</strong>
+          <textarea aria-label="Ответ на задание ${i + 1}" placeholder="Напиши свой ответ здесь..."></textarea>
+          <button class="action-link" style="margin-top:12px;border:none" data-answer="${i}">Показать эталонный ответ ↓</button>
+          <div class="solution" id="answer-${i}">${escapeHtml(task.a)}</div>
+        </article>
+      `).join('');
+      document.querySelectorAll('[data-answer]').forEach(btn => btn.addEventListener('click', () => {
+        const answer = $('answer-' + btn.dataset.answer);
+        answer.classList.toggle('show');
+        btn.textContent = answer.classList.contains('show') ? 'Скрыть эталон ↑' : 'Показать эталонный ответ ↓';
+      }));
+      openModal('open-modal');
+    });
+  </script>
+</body>
+</html>
